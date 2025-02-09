@@ -20,11 +20,11 @@ const TopCoinCard = ({ name, rank, price, marketCap, symbol, changes }: TopCoinC
             <div className='flex justify-between'>
                 <div className='flex flex-col w-fit'>
                     <span className='text-sm text-gray-400'>Price</span>
-                    <span className='text-lg font-semibold'>${price}</span>
+                    <span className='text-lg font-semibold'>${price.toLocaleString()}</span>
                 </div>
                 <div className='flex flex-col w-fit'>
                     <span className='text-sm text-gray-400'>Market Cap</span>
-                    <span className='text-lg font-semibold'>${marketCap}</span>
+                    <span className='text-lg font-semibold'>${marketCap.toLocaleString()}</span>
                 </div>
             </div>
             <div className='flex items-center justify-between'>
@@ -36,8 +36,7 @@ const TopCoinCard = ({ name, rank, price, marketCap, symbol, changes }: TopCoinC
                         <TrendingDown />
                     )}
 
-
-                    {changes}%
+                    {changes.toFixed(2)}%
                 </span>
             </div>
         </div>
