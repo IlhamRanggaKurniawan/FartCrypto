@@ -17,9 +17,7 @@ const CoinChart = ({ coinId }: { coinId: string }) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const res = await fetch(`https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=usd&days=${selectedRange}`, {
-                    next: { revalidate: 30 },
-                })
+                const res = await fetch(`https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=usd&days=${selectedRange}`)
                 const data = await res.json()
                 const formattedData = formatData(data.prices);
                 setData(formattedData)
