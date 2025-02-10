@@ -6,7 +6,7 @@ import { Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'rec
 const formatData = (prices: number[][]) => {
     return prices.map(([timestamp, price]) => ({
         time: new Date(timestamp), // Format: DD/MM/YYYY
-        price: parseFloat(price.toFixed(2)), // Format angka yang lebih rapi
+        price: price, // Format angka yang lebih rapi
     }));
 };
 

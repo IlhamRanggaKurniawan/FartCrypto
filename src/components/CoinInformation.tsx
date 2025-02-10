@@ -1,6 +1,7 @@
 "use client"
 
 import { CryptoCoin } from '@/types'
+import { ArrowDown, ArrowUp } from 'lucide-react'
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 
@@ -25,7 +26,7 @@ const CoinInformation = ({ coinId }: { coinId: string }) => {
         fetchCoins()
     }, [coinId])
 
-    if (loading) {
+    if (loading && !coin) {
         return <div className="text-center py-20 text-white text-xl">Loading...</div>
     }
 
@@ -36,24 +37,27 @@ const CoinInformation = ({ coinId }: { coinId: string }) => {
                     <Image src={coin!.image} alt={coin!.id} width={30} height={30} />
                     <h3 className='font-semibold text-lg'>{coin?.name} ({coin?.symbol.toUpperCase()})</h3>
                 </div>
-                <p className='text-3xl font-bold'>${coin?.current_price}</p>
+                <p className='text-3xl font-bold'>${coin?.current_price.toLocaleString(undefined, { maximumFractionDigits: 20 })}</p>
             </div>
             <div className='grid gap-4 grid-cols-1 sm:grid-cols-2 xl:grid-cols-4'>
                 <div>
                     <p className='text-sm font-light'>Market Cap Rank</p>
-                    <span className='text-xl font-bold'>#1</span>
+                    <span className='text-xl font-bold'>#{coin?.market_cap_rank}</span>
                 </div>
                 <div>
                     <p className='text-sm font-light'>Market Cap</p>
-                    <span className='text-xl font-bold'>$1.918.269.253.818</span>
+                    <span className='text-xl font-bold'>${coin?.market_cap.toLocaleString()}</span>
                 </div>
                 <div>
-                    <p className='text-sm font-light'>24h Trading Volume</p>
-                    <span className='text-xl font-bold'>$30.059.060.822</span>
+                    <p className='text-sm font-light'>Total Supply</p>
+                    <span className='text-xl font-bold'>{coin?.total_supply.toLocaleString()}</span>
                 </div>
                 <div>
                     <p className='text-sm font-light'>24h Change</p>
-                    <span className='text-xl font-bold'>0.46%</span>
+                    <span className={`text-xl font-bold flex ${coin!.price_change_percentage_24h > 0 ? "text-green-500" : "text-red-500"}`}>
+                        {coin!.price_change_percentage_24h > 0 ? <ArrowUp /> : <ArrowDown />}
+
+                        {Math.abs(coin!.price_change_percentage_24h).toFixed(2)}%</span>
                 </div>
 
             </div>
