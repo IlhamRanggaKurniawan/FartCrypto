@@ -31,9 +31,10 @@ const CryptoCoinList = () => {
     }
 
     return (
-        <div className='py-20 grid grid-cols-1 gap-6 px-4 xl:px-40 xl:grid-cols-3'>
+        <div className='py-20 grid grid-cols-1 gap-6 px-4 md:grid-cols-2 xl:px-40 xl:grid-cols-3'>
             {coins.map((coin: CryptoCoin) => (
                 <CryptoCard
+                    coinId={coin.id}
                     image={coin.image}
                     changes={coin.price_change_percentage_24h}
                     marketCap={coin.market_cap}

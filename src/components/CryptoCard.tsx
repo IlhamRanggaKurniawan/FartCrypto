@@ -1,8 +1,10 @@
 import { ArrowDown, ArrowUp } from 'lucide-react'
 import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react'
 
 type CryptoCardProps = {
+    coinId: string,
     image: string,
     name: string,
     symbol: string,
@@ -11,14 +13,14 @@ type CryptoCardProps = {
     changes: number,
 }
 
-const CryptoCard = ({ image, name, symbol, marketCap, price, changes }: CryptoCardProps) => {
+const CryptoCard = ({coinId, image, name, symbol, marketCap, price, changes }: CryptoCardProps) => {
     return (
-        <div className='w-full h-full bg-[1A1A1D] rounded-lg overflow-hidden border border-pink-500'>
+        <Link href={`/market/${coinId}`} className='w-full h-full bg-[1A1A1D] rounded-lg overflow-hidden border border-pink-500'>
             <div className='flex items-center gap-6 p-4'>
                 <Image src={image} alt={name} width={50} height={50} />
                 <div>
                     <h4 className=''>{name} ({symbol.toUpperCase()})</h4>
-                    <span className='font-medium text-lg'>${price.toLocaleString()}</span>
+                    <span className='font-medium text-lg'>${price.toLocaleString(undefined, { maximumFractionDigits: 20 })}</span>
                 </div>
             </div>
             <div className='p-4'>
@@ -35,7 +37,7 @@ const CryptoCard = ({ image, name, symbol, marketCap, price, changes }: CryptoCa
                     </span>
                 </div>
             </div>
-        </div >
+        </ Link>
     )
 }
 
